@@ -1,0 +1,77 @@
+<html>
+
+  <head>
+    <style>
+      #details {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #details td,
+      #details th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #details tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #details tr:hover {
+        background-color: #ddd;
+      }
+
+      #details th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04aa6d;
+        color: white;
+      }
+
+      .bg {
+        background-color: green !important;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="hey">
+      <label>Employee Name</label><br/>
+      <input type="text" id="name" name="name" value=""/><br/>
+      <br/>
+      <label>Event Name</label><br/>
+      <input type="text" id="event" name="event" value=""/><br/>
+      <br/>
+      <label>Event Date</label><br/>
+      <input type="text" id="date" name="date" value=""/><br/>
+      <br/>
+      <input type="submit" name="senddata" value="senddata"/>
+    </form>
+    <div id="test">
+      <h1>please enter a criteria</h1>
+    </div>
+  </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#hey").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+          url: "class/QueryData.php",
+          method: "post",
+          data: $("form").serialize(),
+          dataType: "text",
+          success: function (strMessage) {
+            $("#test").html(strMessage);
+            $("#hey")[0].reset();
+          }
+        });
+      });
+    });
+  </script>
+
+</html>
